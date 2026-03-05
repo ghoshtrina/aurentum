@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getHistoricalRates } from '@/lib/api/frankfurter';
+import { getHistoricalRates, getLatestRates } from '@/lib/api/frankfurter';
 import { invertRate } from '@/lib/utils/calculations';
 
-export const revalidate = 86400;
+export const revalidate = 3600;
 
 export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl;
@@ -14,7 +14,10 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const data = await getHistoricalRates('INR', currency, startDate);
+    const [data, latest] = await Promise.all([
+      getHistoricalRates('INR', currency, startDate),
+      getLatestRates('INR', [currency]),
+    ]);
 
     const history = Object.entries(data.rates)
       .map(([date, rates]) => ({
@@ -22,6 +25,15 @@ export async function GET(request: NextRequest) {
         rate: invertRate(rates[currency] ?? 0),
       }))
       .sort((a, b) => a.date.localeCompare(b.date));
+
+    // Append today's live rate if it's newer than the last historical point
+    if (latest.rates[currency] != null) {
+      const today = new Date().toISOString().split('T')[0];
+      const lastDate = history[history.length - 1]?.date;
+      if (!lastDate || today > lastDate) {
+        history.push({ date: today, rate: invertRate(latest.rates[currency]) });
+      }
+    }
 
     return NextResponse.json({
       currency,
