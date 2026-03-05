@@ -17,6 +17,7 @@ export function Footer() {
           {' '}&middot; Charts by{' '}
           <a href="https://www.tradingview.com/" target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">TradingView</a>
         </p>
+        <p>&copy; 2025 Aurentum. All rights reserved.</p>
       </div>
     </footer>
   );
