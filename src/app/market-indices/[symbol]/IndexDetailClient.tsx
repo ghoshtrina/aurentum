@@ -82,7 +82,7 @@ export function IndexDetailClient({
     <div className="space-y-6">
       {marketClosed && (
         <div className="rounded-xl border border-border bg-card p-4 text-center text-sm text-muted-foreground">
-          Markets are closed today. Showing latest available data.
+          Markets are closed right now. Showing latest available data.
         </div>
       )}
 

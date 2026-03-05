@@ -26,7 +26,7 @@ export function MetalsClient({ prices }: MetalsClientProps) {
     <div className="space-y-6">
       {prices.marketClosed && (
         <div className="rounded-xl border border-border bg-card p-4 text-center text-sm text-muted-foreground">
-          Indian bullion markets are closed today. Showing latest available prices.
+          Indian bullion markets are closed right now. Showing latest available prices.
         </div>
       )}
 
