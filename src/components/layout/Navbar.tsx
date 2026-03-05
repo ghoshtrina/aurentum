@@ -23,7 +23,7 @@ export function Navbar() {
     <nav className="sticky top-0 z-50 border-b border-border bg-card/80 backdrop-blur-md">
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2 text-lg font-bold tracking-tight text-accent">
-          <Image src="/icon.png" alt="Aurentum" width={28} height={28} className="rounded-sm" />
+          <Image src="/icon.png" alt="Aurentum" width={36} height={36} />
           Aurentum
         </Link>
 
