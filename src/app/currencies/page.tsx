@@ -39,7 +39,7 @@ async function getCurrencyRates() {
       };
     });
 
-    return { date: latest.date, base: 'INR', rates, fetchedAt: new Date().toISOString() };
+    return { date: latest.date, base: 'INR', rates, fetchedAt: latest.date };
   } catch (error) {
     console.error('Failed to fetch currency data:', error);
     return null;
